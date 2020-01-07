@@ -8,14 +8,22 @@ public class Player : Singleton<Player>
 
     public float YPosResistance;
 
+    public Transform WeaponTransform;
+
+    public MeshRenderer ForceFieldRenderer;
+
     private Camera _cam;
 
     private Vector2 _firstTouchPos, _currentTouchPos;
     private Vector3 _currentEuler;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _cam = Camera.main;
+
+        SwitchShield();
     }
 
     private void Start()
@@ -26,6 +34,26 @@ public class Player : Singleton<Player>
     private void Update()
     {
         PlayerInputUpdate();
+    }
+
+    public void SwitchShield()
+    {
+        ShipData.ShieldType = ShipData.ShieldType == BulletTypeEnum.Blue ? BulletTypeEnum.Red : BulletTypeEnum.Blue;
+
+        Color shieldColor = Color.white;
+
+        switch(ShipData.ShieldType)
+        {
+            case BulletTypeEnum.Blue:
+                shieldColor = new Color(0, 0, 1, 0.25f);
+                break;
+
+            case BulletTypeEnum.Red:
+                shieldColor = new Color(1, 0, 0, 0.25f);
+                break;
+        }
+
+        ForceFieldRenderer.material.SetColor("_Color", shieldColor);
     }
 
     private void PlayerInputUpdate()
@@ -55,9 +83,9 @@ public class Player : Singleton<Player>
                     _currentEuler.x = 15;
                 }
 
-                if(Mathf.Abs(transform.position.y) == 4)
+                if(Mathf.Abs(newPos.y) >= 4)
                 {
-
+                    newPos = transform.position;
                 }
 
                 transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * ShipData.Speed);
