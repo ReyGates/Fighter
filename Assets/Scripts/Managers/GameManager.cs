@@ -10,6 +10,12 @@ public class GameManager : Singleton<GameManager>
 
     private Coroutine _coroutine;
 
+    private void Start()
+    {
+        SpawnManager.Instance.SpawnPlayer();
+        StartGame();
+    }
+
     public void StartGame()
     {
         _coroutine = StartCoroutine(GameEnumerator());
