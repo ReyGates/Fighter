@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     public ShipData ShipData;
 
     public float YPosResistance;
 
-    [SerializeField]
     private Camera _cam;
 
     private Vector2 _firstTouchPos, _currentTouchPos;
     private Vector3 _currentEuler;
+
+    private void Awake()
+    {
+        _cam = Camera.main;
+    }
 
     private void Start()
     {
@@ -49,6 +53,11 @@ public class Player : MonoBehaviour
                 {
                     newPos.y -= 1;
                     _currentEuler.x = 15;
+                }
+
+                if(Mathf.Abs(transform.position.y) == 4)
+                {
+
                 }
 
                 transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * ShipData.Speed);
