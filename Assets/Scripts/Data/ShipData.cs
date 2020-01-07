@@ -6,5 +6,6 @@ using UnityEngine;
 [Serializable]
 public class ShipData
 {
+    public BulletTypeEnum ShieldType;
     public float Speed;
 }
