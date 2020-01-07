@@ -48,9 +48,11 @@ public class Player : BaseShip<PlayerShipData, Player>
 
     private void PlayerInputUpdate()
     {
+        Vector3 newPos = transform.position;
+
         if (Input.GetMouseButton(0))
         {
-            Vector3 newPos = Input.mousePosition;
+            newPos = Input.mousePosition;
             newPos = _cam.ScreenToWorldPoint(newPos);
 
             GameObject go = EventSystem.current.currentSelectedGameObject;
@@ -61,7 +63,15 @@ public class Player : BaseShip<PlayerShipData, Player>
                     newPos = transform.position;
             }
 
-            base.Move(newPos);
+            if (newPos.x < -2)
+                newPos.x = -2;
+
+            if (newPos.x > 12)
+                newPos.x = 12;
+
+
         }
+
+        base.Move(newPos);
     }
 }
