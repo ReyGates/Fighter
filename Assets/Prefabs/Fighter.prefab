@@ -4923,10 +4923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    Speed: 1
+    Speed: 10
     ShieldType: 0
-  YPosResistance: 1
-  XPosResistance: 1
   WeaponTransform: {fileID: 571823117}
   ForceFieldRenderer: {fileID: 1858627287}
 --- !u!1001 &8141902259263089171

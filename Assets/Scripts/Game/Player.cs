@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Player : BaseShip<PlayerShipData, Player>
 {
-    public float YPosResistance, XPosResistance;
-
     public Transform WeaponTransform;
 
     public MeshRenderer ForceFieldRenderer;
 
     private Camera _cam;
-
-    private Vector2 _firstTouchPos, _currentTouchPos;
 
     protected override void Awake()
     {
@@ -50,53 +48,20 @@ public class Player : BaseShip<PlayerShipData, Player>
 
     private void PlayerInputUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _firstTouchPos = _cam.ScreenToWorldPoint(Input.mousePosition);
-        }
-
         if (Input.GetMouseButton(0))
         {
-            _currentTouchPos = _cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 newPos = Input.mousePosition;
+            newPos = _cam.ScreenToWorldPoint(newPos);
 
-            bool yFlag = Utility.CheckInputTouchPosition(_currentTouchPos.y, _firstTouchPos.y, YPosResistance);
-            bool xFlag = Utility.CheckInputTouchPosition(_currentTouchPos.x, _firstTouchPos.x, XPosResistance);
+            GameObject go = EventSystem.current.currentSelectedGameObject;
 
-            if (yFlag || xFlag)
+            if (go != null)
             {
-                Vector3 newPos = transform.position;
-
-                if (_currentTouchPos.y > (_firstTouchPos.y + YPosResistance))
-                {
-                    newPos.y += 1;
-                }
-                else if (_currentTouchPos.y < (_firstTouchPos.y - YPosResistance))
-                {
-                    newPos.y -= 1;
-                }
-
-                if (_currentTouchPos.x > (_firstTouchPos.x + XPosResistance))
-                {
-                    newPos.x += 1;
-                }
-                else if (_currentTouchPos.x < (_firstTouchPos.x - XPosResistance))
-                {
-                    newPos.x -= 1;
-                }
-
-                if (Mathf.Abs(newPos.y) >= 4)
-                {
+                if (go.GetComponent<Button>() != null)
                     newPos = transform.position;
-                }
-
-                base.Move(newPos);
             }
-        }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            _currentTouchPos = Vector3.zero;
-            _firstTouchPos = Vector3.zero;
+            base.Move(newPos);
         }
     }
 }
