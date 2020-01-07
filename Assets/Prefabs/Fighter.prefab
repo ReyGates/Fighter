@@ -4922,10 +4922,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207c3e8e37a4c409d72be10aac8a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShipData:
-    ShieldType: 1
-    Speed: 10
+  Data:
+    Speed: 1
+    ShieldType: 0
   YPosResistance: 1
+  XPosResistance: 1
   WeaponTransform: {fileID: 571823117}
   ForceFieldRenderer: {fileID: 1858627287}
 --- !u!1001 &8141902259263089171

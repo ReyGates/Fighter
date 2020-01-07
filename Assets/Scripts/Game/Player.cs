@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Singleton<Player>
+public class Player : BaseShip<PlayerShipData, Player>
 {
-    public ShipData ShipData;
-
-    public float YPosResistance;
+    public float YPosResistance, XPosResistance;
 
     public Transform WeaponTransform;
 
@@ -15,7 +13,6 @@ public class Player : Singleton<Player>
     private Camera _cam;
 
     private Vector2 _firstTouchPos, _currentTouchPos;
-    private Vector3 _currentEuler;
 
     protected override void Awake()
     {
@@ -26,11 +23,6 @@ public class Player : Singleton<Player>
         SwitchShield();
     }
 
-    private void Start()
-    {
-        _currentEuler = transform.rotation.eulerAngles;
-    }
-
     private void Update()
     {
         PlayerInputUpdate();
@@ -38,11 +30,11 @@ public class Player : Singleton<Player>
 
     public void SwitchShield()
     {
-        ShipData.ShieldType = ShipData.ShieldType == BulletTypeEnum.Blue ? BulletTypeEnum.Red : BulletTypeEnum.Blue;
+        Data.ShieldType = Data.ShieldType == BulletTypeEnum.Blue ? BulletTypeEnum.Red : BulletTypeEnum.Blue;
 
         Color shieldColor = Color.white;
 
-        switch(ShipData.ShieldType)
+        switch (Data.ShieldType)
         {
             case BulletTypeEnum.Blue:
                 shieldColor = new Color(0, 0, 1, 0.25f);
@@ -66,29 +58,38 @@ public class Player : Singleton<Player>
         if (Input.GetMouseButton(0))
         {
             _currentTouchPos = _cam.ScreenToWorldPoint(Input.mousePosition);
-            _currentEuler = transform.rotation.eulerAngles;
 
-            if (_currentTouchPos.y > (_firstTouchPos.y + YPosResistance) || _currentTouchPos.y < (_firstTouchPos.y - YPosResistance))
+            bool yFlag = Utility.CheckInputTouchPosition(_currentTouchPos.y, _firstTouchPos.y, YPosResistance);
+            bool xFlag = Utility.CheckInputTouchPosition(_currentTouchPos.x, _firstTouchPos.x, XPosResistance);
+
+            if (yFlag || xFlag)
             {
                 Vector3 newPos = transform.position;
 
                 if (_currentTouchPos.y > (_firstTouchPos.y + YPosResistance))
                 {
                     newPos.y += 1;
-                    _currentEuler.x = -15;
                 }
                 else if (_currentTouchPos.y < (_firstTouchPos.y - YPosResistance))
                 {
                     newPos.y -= 1;
-                    _currentEuler.x = 15;
                 }
 
-                if(Mathf.Abs(newPos.y) >= 4)
+                if (_currentTouchPos.x > (_firstTouchPos.x + XPosResistance))
+                {
+                    newPos.x += 1;
+                }
+                else if (_currentTouchPos.x < (_firstTouchPos.x - XPosResistance))
+                {
+                    newPos.x -= 1;
+                }
+
+                if (Mathf.Abs(newPos.y) >= 4)
                 {
                     newPos = transform.position;
                 }
 
-                transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * ShipData.Speed);
+                base.Move(newPos);
             }
         }
 
@@ -96,9 +97,6 @@ public class Player : Singleton<Player>
         {
             _currentTouchPos = Vector3.zero;
             _firstTouchPos = Vector3.zero;
-            _currentEuler.x = 0;
         }
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_currentEuler), Time.deltaTime * 5);
     }
 }
