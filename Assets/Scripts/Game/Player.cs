@@ -15,7 +15,7 @@ public class Player : BaseShip<PlayerShipData, Player>
         base.Awake();
 
         _animator = GetComponent<Animator>();
-
+        Data.Power = 0;
         SwitchShield();
     }
 

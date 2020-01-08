@@ -54,9 +54,14 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
 
         if(Data.Health <= 0)
         {
-            Destroy(_healthBarUI.gameObject);
-            Destroy(gameObject);
+            Destroy();
         }
+    }
+
+    public void Destroy()
+    {
+        Destroy(_healthBarUI.gameObject);
+        SpawnManager.Instance.RemoveFromList(gameObject);
     }
 
     private void UpdateUI()
@@ -107,7 +112,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         }
         else
         {
-            SpawnManager.Instance.RemoveFromList(gameObject);
+            Destroy();
         }
     }
 
@@ -138,6 +143,9 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
 
     protected void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false)
     {
+        if (Data.Health <= 0)
+            return;
+
         Bullet newBullet = Instantiate(BulletPrefab, weapon.position, BulletPrefab.transform.rotation, SpawnManager.Instance.BulletParent);
         newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
         newBullet.Speed = speed;

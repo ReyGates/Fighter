@@ -12,13 +12,27 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        SpawnManager.Instance.SpawnPlayer();
         StartGame();
     }
 
     public void StartGame()
     {
+        Time.timeScale = 1;
+        _counter = 0;
+        SpawnManager.Instance.SpawnPlayer();
         _coroutine = StartCoroutine(GameEnumerator());
+    }
+
+    public void ResumeGame()
+    {
+        SpawnManager.Instance.SpawnPlayer();
+    }
+
+    public void RestartGame()
+    {
+        StopCoroutine(_coroutine);
+        SpawnManager.Instance.DestroyAllEnemies();
+        StartGame();
     }
 
     IEnumerator GameEnumerator()
@@ -32,6 +46,7 @@ public class GameManager : Singleton<GameManager>
             if(Player.Instance == null)
             {
                 Time.timeScale = 0;
+                GameOverPanel.Instance.gameObject.SetActive(true);
                 yield return new WaitUntil(()=>Player.Instance != null);
                 Time.timeScale = 1;
             }

@@ -37,6 +37,24 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public void SpawnPlayer()
     {
+        foreach (var bullet in BulletParent.GetComponentsInChildren<Bullet>())
+        {
+            Destroy(bullet.gameObject);
+        }
+
         Instantiate(PlayerPrefab, Vector3.zero, PlayerPrefab.transform.rotation);
+    }
+
+    public void DestroyAllEnemies()
+    {
+        for(int i = 0; i < EnemyList.Count; i++)
+        {
+            EnemyList[i].Data.Health = 0;
+        }
+
+        if(Boss != null)
+            Boss.Data.Health = 0;
+
+        EnemyList.Clear();
     }
 }
