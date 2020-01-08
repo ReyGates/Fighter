@@ -4885,6 +4885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8141902259035189618}
   - component: {fileID: 1754695460}
+  - component: {fileID: 698723540}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -4927,6 +4928,25 @@ MonoBehaviour:
     ShieldType: 0
   WeaponTransform: {fileID: 571823117}
   ForceFieldRenderer: {fileID: 1858627287}
+--- !u!95 &698723540
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141902259035189619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 541f4ff59c6f1ac4ab17fe8f32e174a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8141902259263089171
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,12 +11,14 @@ public class Player : BaseShip<PlayerShipData, Player>
     public MeshRenderer ForceFieldRenderer;
 
     private Camera _cam;
+    private Animator _animator;
 
     protected override void Awake()
     {
         base.Awake();
 
         _cam = Camera.main;
+        _animator = GetComponent<Animator>();
 
         SwitchShield();
     }
@@ -44,6 +46,7 @@ public class Player : BaseShip<PlayerShipData, Player>
         }
 
         ForceFieldRenderer.material.SetColor("_Color", shieldColor);
+        _animator.SetTrigger("Change Shield");
     }
 
     private void PlayerInputUpdate()
@@ -53,14 +56,21 @@ public class Player : BaseShip<PlayerShipData, Player>
         if (Input.GetMouseButton(0))
         {
             newPos = Input.mousePosition;
+
+            if (Input.touchCount > 0)
+                newPos = Input.touches[0].position;
+
             newPos = _cam.ScreenToWorldPoint(newPos);
 
-            GameObject go = EventSystem.current.currentSelectedGameObject;
+            newPos.x += 1;
 
+            GameObject go = EventSystem.current.currentSelectedGameObject;
             if (go != null)
             {
-                if (go.GetComponent<Button>() != null)
-                    newPos = transform.position;
+                if(go.GetComponent<Button>() != null)
+                {
+
+                }
             }
 
             if (newPos.x < -2)
@@ -68,8 +78,6 @@ public class Player : BaseShip<PlayerShipData, Player>
 
             if (newPos.x > 12)
                 newPos.x = 12;
-
-
         }
 
         base.Move(newPos);
