@@ -19,6 +19,16 @@ public class SpawnManager : Singleton<SpawnManager>
         EnemyList.Add(Instantiate(enemy, new Vector3(15, Random.Range(-4, 4), 0), enemy.transform.rotation, EnemyParent));
     }
 
+    public void RemoveFromList(GameObject go)
+    {
+        if(go.GetComponent<Enemy>() != null)
+        {
+            EnemyList.Remove(go.GetComponent<Enemy>());
+        }
+
+        Destroy(go);
+    }
+
     public void SpawnEnemyBoss()
     {
 

@@ -2,10 +2,41 @@
 
 public class Bullet : MonoBehaviour
 {
-    public BulletTypeEnum BulletType;
+    [SerializeField]
+    private BulletTypeEnum _bulletType;
+    public BulletTypeEnum BulletType
+    {
+        get
+        {
+            return _bulletType;
+        }
+
+        set
+        {
+            Color selected = Color.yellow;
+
+            switch(value)
+            {
+                case BulletTypeEnum.Blue:
+                    selected = Color.blue;
+                    break;
+
+                case BulletTypeEnum.Red:
+                    selected = Color.red;
+                    break;
+            }
+
+            _trailRenderer.material.color = selected;
+
+            _bulletType = value;
+        }
+    }
+
     public BulletDirectionEnum BulletDirection;
 
     public float Speed;
+
+    private TrailRenderer _trailRenderer;
 
     private void Update()
     {
