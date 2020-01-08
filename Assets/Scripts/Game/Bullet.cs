@@ -40,15 +40,22 @@ public class Bullet : MonoBehaviour
 
     public float Speed;
 
+    public Transform Target;
+
     public TrailRenderer TrailRenderer;
+
+    private Vector3 _direction;
 
     private void Update()
     {
+        if (Target != null)
+            _direction = Target.position - transform.position;
+
         if (transform.position.x < 15 && transform.position.x > -5)
         {
-            Vector3 newPos = transform.position;
+            Vector3 newPos = transform.localPosition;
             newPos.x += (int)BulletDirection;
-            transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * Speed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, newPos, Time.deltaTime * Speed);
         }
         else
         {

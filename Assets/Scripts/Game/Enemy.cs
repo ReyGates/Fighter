@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : BaseShip<EnemyShipData, Enemy>
 {
-    private void Update()
+    protected virtual void Update()
     {
         _fire = true;
 

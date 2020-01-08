@@ -12,6 +12,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public List<Enemy> EnemyList;
 
     public Transform EnemyParent;
+    public Transform BulletParent;
 
     public void SpawnEnemyFighter()
     {

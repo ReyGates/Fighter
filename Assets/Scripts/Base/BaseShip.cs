@@ -18,6 +18,8 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
     [SerializeField]
     protected BulletDirectionEnum _bulletDirectionEnum;
 
+    private BulletTypeEnum _bulletType;
+
     protected virtual void Start()
     {
         StartCoroutine(FireEnumerator());
@@ -50,29 +52,37 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
 
     IEnumerator FireEnumerator()
     {
-        while(true)
+        if (BulletLayerMask == "Enemy")
+        {
+            int random = Random.Range(1, 3);
+            _bulletType = (BulletTypeEnum)random;
+        }
+        else
+        {
+            _bulletType = BulletTypeEnum.Player;
+        }
+
+        while (true)
         {
             if (_fire)
             {
-                Bullet newBullet = Instantiate(BulletPrefab, WeaponTransform.position, BulletPrefab.transform.rotation);
-                newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
-                newBullet.Speed = Data.BulletSpeed;
-                newBullet.BulletDirection = _bulletDirectionEnum;
-
-                if(BulletLayerMask == "Enemy")
-                {
-                    int random = Random.Range(1, 3);
-                    newBullet.BulletType = (BulletTypeEnum)random;
-                }
-                else
-                {
-                    newBullet.BulletType = BulletTypeEnum.Player;
-                }
+                FireBullet(WeaponTransform);
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }
 
             yield return new WaitUntil(()=>_fire);
         }
+    }
+
+    protected void FireBullet(Transform weapon, Transform target = null)
+    {
+        Bullet newBullet = Instantiate(BulletPrefab, weapon.position, BulletPrefab.transform.rotation, SpawnManager.Instance.BulletParent);
+        newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
+        newBullet.Speed = Data.BulletSpeed;
+        newBullet.Target = target;
+        newBullet.BulletDirection = _bulletDirectionEnum;
+
+        newBullet.BulletType = _bulletType;
     }
 }
