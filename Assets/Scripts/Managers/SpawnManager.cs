@@ -16,7 +16,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public void SpawnEnemyFighter()
     {
         Enemy enemy = EnemyPrefabList[Random.Range(0, EnemyPrefabList.Count)];
-        EnemyList.Add(Instantiate(enemy, new Vector3(15, Random.Range(-4, 4), 0), enemy.transform.rotation, EnemyParent));
+        EnemyList.Add(Instantiate(enemy, new Vector3(15, Random.Range(-4f, 4f), 0), enemy.transform.rotation, EnemyParent));
     }
 
     public void RemoveFromList(GameObject go)

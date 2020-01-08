@@ -1,6 +1,6 @@
-﻿public enum BulletTypeEnum
+﻿public enum BulletTypeEnum : int
 {
-    Player,
-    Red,
-    Blue
+    Player = 0,
+    Red = 1,
+    Blue = 2
 }

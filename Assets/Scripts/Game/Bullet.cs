@@ -2,6 +2,10 @@
 
 public class Bullet : MonoBehaviour
 {
+    public Gradient BlueBulletColor;
+    public Gradient RedBulletColor;
+    public Gradient PlayerBulletColor;
+
     [SerializeField]
     private BulletTypeEnum _bulletType;
     public BulletTypeEnum BulletType
@@ -13,20 +17,20 @@ public class Bullet : MonoBehaviour
 
         set
         {
-            Color selected = Color.yellow;
-
             switch(value)
             {
                 case BulletTypeEnum.Blue:
-                    selected = Color.blue;
+                    TrailRenderer.colorGradient = BlueBulletColor;
                     break;
 
                 case BulletTypeEnum.Red:
-                    selected = Color.red;
+                    TrailRenderer.colorGradient = RedBulletColor;
+                    break;
+
+                case BulletTypeEnum.Player:
+                    TrailRenderer.colorGradient = PlayerBulletColor;
                     break;
             }
-
-            _trailRenderer.material.color = selected;
 
             _bulletType = value;
         }
@@ -36,7 +40,7 @@ public class Bullet : MonoBehaviour
 
     public float Speed;
 
-    private TrailRenderer _trailRenderer;
+    public TrailRenderer TrailRenderer;
 
     private void Update()
     {

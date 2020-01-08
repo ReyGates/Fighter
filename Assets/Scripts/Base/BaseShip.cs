@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using Random = UnityEngine.Random;
 
 public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : MonoBehaviour
 {
@@ -56,6 +58,16 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
                 newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
                 newBullet.Speed = Data.BulletSpeed;
                 newBullet.BulletDirection = _bulletDirectionEnum;
+
+                if(BulletLayerMask == "Enemy")
+                {
+                    int random = Random.Range(1, 3);
+                    newBullet.BulletType = (BulletTypeEnum)random;
+                }
+                else
+                {
+                    newBullet.BulletType = BulletTypeEnum.Player;
+                }
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }
