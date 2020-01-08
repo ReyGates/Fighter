@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGamePanel : Singleton<InGamePanel>
 {
+    public Slider PowerIndicatorSlider;
+
+    public Button PowerButton;
+
     public void ChangeShield()
     {
         if (Player.Instance != null)

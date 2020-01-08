@@ -8,21 +8,21 @@ public class Player : BaseShip<PlayerShipData, Player>
 {
     public MeshRenderer ForceFieldRenderer;
 
-    private Camera _cam;
     private Animator _animator;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _cam = Camera.main;
         _animator = GetComponent<Animator>();
 
         SwitchShield();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         PlayerInputUpdate();
     }
 
@@ -94,14 +94,13 @@ public class Player : BaseShip<PlayerShipData, Player>
 
     public override void OnGetHit(Bullet bullet)
     {
-        base.OnGetHit(bullet);
-
         if(bullet.BulletType != Data.ShieldType)
         {
             Data.Health -= bullet.Damage;
-            Data.Power += 0.5f;
         }
 
-        Destroy(bullet.gameObject);
+        Data.Power += 0.5f;
+
+        base.OnGetHit(bullet);
     }
 }

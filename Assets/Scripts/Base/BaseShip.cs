@@ -20,9 +20,33 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
 
     private BulletTypeEnum _bulletType;
 
+    private HealthBarUI _healthBarUI;
+
+    protected Camera _cam;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _cam = Camera.main;
+    }
+
     protected virtual void Start()
     {
+        InitializeUI();
         StartCoroutine(FireEnumerator());
+    }
+
+    private void InitializeUI()
+    {
+        _healthBarUI = GuiManager.CreateHealthBarUI();
+        _healthBarUI.HealthBarSlider.maxValue = Data.Health;
+        _healthBarUI.HealthBarSlider.value = Data.Health;
+    }
+
+    protected virtual void Update()
+    {
+        _healthBarUI.RectTransform.position = _cam.WorldToScreenPoint(transform.position);
     }
 
     protected void Move(Vector3 newPos)
@@ -88,5 +112,8 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
 
     public virtual void OnGetHit(Bullet bullet)
     {
+        Destroy(bullet.gameObject);
+
+        _healthBarUI.HealthBarSlider.value = Data.Health;
     }
 }
