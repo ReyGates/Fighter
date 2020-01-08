@@ -45,6 +45,7 @@ public class Player : BaseShip<PlayerShipData, Player>
 
         ForceFieldRenderer.material.SetColor("_Color", shieldColor);
         _animator.SetTrigger("Change Shield");
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void PlayerInputUpdate()
@@ -65,9 +66,12 @@ public class Player : BaseShip<PlayerShipData, Player>
             GameObject go = EventSystem.current.currentSelectedGameObject;
             if (go != null)
             {
-                if(go.GetComponent<Button>() != null)
+                if (Input.touchCount < 2)
                 {
-                    newPos = transform.position;
+                    if (go.GetComponent<Button>() != null)
+                    {
+                        newPos = transform.position;
+                    }
                 }
             }
 

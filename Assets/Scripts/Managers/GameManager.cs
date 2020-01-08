@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         while(_counter < GameDuration)
         {
             yield return new WaitForSeconds(1);
+            SpawnManager.Instance.SpawnEnemyFighter();
             _counter++;
         }
     }

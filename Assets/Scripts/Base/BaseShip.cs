@@ -7,10 +7,14 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
 
     public Transform WeaponTransform;
     public Bullet BulletPrefab;
+    public string BulletLayerMask;
 
     private float _bulletDelayCounter;
 
     protected bool _fire = false;
+
+    [SerializeField]
+    protected BulletDirectionEnum _bulletDirectionEnum;
 
     protected virtual void Start()
     {
@@ -42,7 +46,9 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
             if (_fire)
             {
                 Bullet newBullet = Instantiate(BulletPrefab, WeaponTransform.position, BulletPrefab.transform.rotation);
+                newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
                 newBullet.Speed = Data.BulletSpeed;
+                newBullet.BulletDirection = _bulletDirectionEnum;
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }

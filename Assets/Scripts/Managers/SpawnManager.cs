@@ -5,10 +5,18 @@ using UnityEngine;
 public class SpawnManager : Singleton<SpawnManager>
 {
     public Player PlayerPrefab;
+    public Enemy BossPrefab;
+    public List<Enemy> EnemyPrefabList;
+
+    public Enemy Boss;
+    public List<Enemy> EnemyList;
+
+    public Transform EnemyParent;
 
     public void SpawnEnemyFighter()
     {
-
+        Enemy enemy = EnemyPrefabList[Random.Range(0, EnemyPrefabList.Count)];
+        EnemyList.Add(Instantiate(enemy, new Vector3(15, Random.Range(-4, 4), 0), enemy.transform.rotation, EnemyParent));
     }
 
     public void SpawnEnemyBoss()
