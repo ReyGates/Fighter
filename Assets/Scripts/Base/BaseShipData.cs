@@ -9,4 +9,5 @@ public class BaseShipData
     public float Health = 10;
 
     public float BulletDelay = 1;
+    public float BulletDamage = 1;
 }

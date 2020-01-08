@@ -103,4 +103,34 @@ public class Player : BaseShip<PlayerShipData, Player>
 
         base.OnGetHit(bullet);
     }
+
+    public void PowerShot()
+    {
+        if(Data.Power >= 100)
+            StartCoroutine(PowerShotEnumerator());
+    }
+
+    private IEnumerator PowerShotEnumerator()
+    {
+        for(int i = 0; i < Data.PowerAmmo; i++)
+        {
+            Enemy target = null;
+
+            if (SpawnManager.Instance.EnemyList.Count > 0)
+                target = SpawnManager.Instance.EnemyList[Random.Range(0, SpawnManager.Instance.EnemyList.Count)];
+
+            if (target != null)
+            {
+                FireBullet(transform, 1, target.transform, true, Data.PowerDamagePerShot);
+            }
+            else
+            {
+                i--;
+            }
+
+            yield return new WaitForSeconds(Data.PowerDelayPerShot);
+
+            Data.Power = 0;
+        }
+    }
 }

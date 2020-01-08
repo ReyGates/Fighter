@@ -14,4 +14,10 @@ public class InGamePanel : Singleton<InGamePanel>
         if (Player.Instance != null)
             Player.Instance.SwitchShield();
     }
+
+    public void PowerShot()
+    {
+        if (Player.Instance != null)
+            Player.Instance.PowerShot();
+    }
 }

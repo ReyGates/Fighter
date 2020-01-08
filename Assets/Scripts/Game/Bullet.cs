@@ -42,6 +42,8 @@ public class Bullet : MonoBehaviour
 
     public float Speed;
 
+    public bool FollowTarget = false;
+
     private Transform _target;
     public Transform Target
     {
@@ -68,6 +70,36 @@ public class Bullet : MonoBehaviour
         if (transform.position.x < 15 && transform.position.x > -5)
         {
             Vector3 newPos = transform.localPosition;
+
+            if(FollowTarget)
+            {
+                if(_target == null)
+                {
+                    if(_bulletType == BulletTypeEnum.Player)
+                    {
+                        float mostNearest = 0;
+                        foreach(var target in SpawnManager.Instance.EnemyList)
+                        {
+                            float distance = Vector3.Distance(transform.position, target.transform.position);
+                            if (mostNearest == 0)
+                                mostNearest = distance;
+                            else
+                            {
+                                if(mostNearest > distance)
+                                {
+                                    mostNearest = distance;
+                                    _target = target.transform;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (_target != null)
+                    _direction = _target.position - transform.position;
+
+                Speed = Mathf.Lerp(Speed, Speed + 3, Time.deltaTime * 10);
+            }
 
             if (_target != null)
             {

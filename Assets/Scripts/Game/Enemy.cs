@@ -26,7 +26,7 @@ public class Enemy : BaseShip<EnemyShipData, Enemy>
         if(bullet.BulletType == BulletTypeEnum.Player)
         {
             Data.Health -= bullet.Damage;
-            Player.Instance.Data.Power += 1;
+            Player.Instance.Data.Power += 2;
         }
 
         base.OnGetHit(bullet);

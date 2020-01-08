@@ -4927,8 +4927,13 @@ MonoBehaviour:
   Data:
     Speed: 10
     BulletSpeed: 30
+    Health: 1000
     BulletDelay: 0.15
+    BulletDamage: 1
     ShieldType: 0
+    PowerAmmo: 50
+    PowerDamagePerShot: 2
+    PowerDelayPerShot: 0.05
   WeaponTransform: {fileID: 571823117}
   BulletPrefab: {fileID: 6029470201958612944, guid: 311cca651839d1a4890d67292925562a,
     type: 3}

@@ -9,6 +9,7 @@ public class EnemyFighter : Enemy
     public float Cooldown = 1;
     public float DelayPerFire = 0.25f;
     public float TurretBulletSpeed = 10;
+    public float TurretBulletDamage = 0.25f;
 
     private float _cooldownCounter;
     private float _delayCounter;
@@ -31,7 +32,7 @@ public class EnemyFighter : Enemy
             {
                 if (Player.Instance != null)
                 {
-                    FireBullet(Turret, TurretBulletSpeed, Player.Instance.transform);
+                    FireBullet(Turret, TurretBulletSpeed, Player.Instance.transform, false, TurretBulletDamage);
 
                     _turretAmmoCounter--;
                     _delayCounter = DelayPerFire;

@@ -24,4 +24,8 @@ public class PlayerShipData : BaseShipData
             InGamePanel.Instance.PowerButton.interactable = _power >= 100;
         }
     }
+
+    public int PowerAmmo = 30;
+    public float PowerDamagePerShot = 5;
+    public float PowerDelayPerShot = 0.1f;
 }

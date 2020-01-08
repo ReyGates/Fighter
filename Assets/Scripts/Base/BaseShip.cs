@@ -132,7 +132,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         {
             if (_fire)
             {
-                FireBullet(WeaponTransform, Data.BulletSpeed);
+                FireBullet(WeaponTransform, Data.BulletSpeed, null, false, Data.BulletDamage);
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }
@@ -141,16 +141,20 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         }
     }
 
-    protected void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false)
+    protected void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false, float damage = -1)
     {
         if (Data.Health <= 0)
             return;
 
         Bullet newBullet = Instantiate(BulletPrefab, weapon.position, BulletPrefab.transform.rotation, SpawnManager.Instance.BulletParent);
         newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
+        newBullet.FollowTarget = followTarget;
         newBullet.Speed = speed;
         newBullet.Target = target;
         newBullet.BulletDirection = _bulletDirectionEnum;
+
+        if (damage != -1)
+            newBullet.Damage = damage;
 
         newBullet.BulletType = _bulletType;
     }
