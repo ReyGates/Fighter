@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Player : BaseShip<PlayerShipData, Player>
 {
-    public Transform WeaponTransform;
-
     public MeshRenderer ForceFieldRenderer;
 
     private Camera _cam;
@@ -69,7 +67,7 @@ public class Player : BaseShip<PlayerShipData, Player>
             {
                 if(go.GetComponent<Button>() != null)
                 {
-
+                    newPos = transform.position;
                 }
             }
 
@@ -78,6 +76,13 @@ public class Player : BaseShip<PlayerShipData, Player>
 
             if (newPos.x > 12)
                 newPos.x = 12;
+
+            _fire = true;
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            _fire = false;
         }
 
         base.Move(newPos);

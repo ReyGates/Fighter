@@ -5,4 +5,7 @@ using System;
 public class BaseShipData
 {
     public float Speed;
+    public float BulletSpeed;
+
+    public float BulletDelay = 1;
 }

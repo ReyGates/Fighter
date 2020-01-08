@@ -4925,8 +4925,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     Speed: 10
+    BulletSpeed: 30
+    BulletDelay: 0.25
     ShieldType: 0
   WeaponTransform: {fileID: 571823117}
+  BulletPrefab: {fileID: 6029470201958612944, guid: 311cca651839d1a4890d67292925562a,
+    type: 3}
   ForceFieldRenderer: {fileID: 1858627287}
 --- !u!95 &698723540
 Animator:
