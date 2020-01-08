@@ -911,7 +911,7 @@ MonoBehaviour:
   Boss: {fileID: 0}
   EnemyList: []
   EnemyParent: {fileID: 1556632543}
-  BulletParent: {fileID: 0}
+  BulletParent: {fileID: 155116848}
 --- !u!1 &1071894810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a5268f7c170654cb9862b4b7044f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameDuration: 30
+  GameDuration: 60
 --- !u!1 &2035403199
 GameObject:
   m_ObjectHideFlags: 0

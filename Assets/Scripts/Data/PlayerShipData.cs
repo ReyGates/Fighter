@@ -7,4 +7,5 @@ using UnityEngine;
 public class PlayerShipData : BaseShipData
 {
     public BulletTypeEnum ShieldType;
+    public float Power;
 }

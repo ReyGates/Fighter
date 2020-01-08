@@ -91,4 +91,17 @@ public class Player : BaseShip<PlayerShipData, Player>
 
         base.Move(newPos);
     }
+
+    public override void OnGetHit(Bullet bullet)
+    {
+        base.OnGetHit(bullet);
+
+        if(bullet.BulletType != Data.ShieldType)
+        {
+            Data.Health -= bullet.Damage;
+            Data.Power += 0.5f;
+        }
+
+        Destroy(bullet.gameObject);
+    }
 }

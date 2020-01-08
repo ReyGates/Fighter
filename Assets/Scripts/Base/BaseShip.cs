@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using Random = UnityEngine.Random;
 
-public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : MonoBehaviour
+public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData where U : MonoBehaviour
 {
     public T Data;
 
@@ -66,7 +66,7 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
         {
             if (_fire)
             {
-                FireBullet(WeaponTransform);
+                FireBullet(WeaponTransform, Data.BulletSpeed);
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }
@@ -75,14 +75,18 @@ public class BaseShip<T, U> : Singleton<U> where T : BaseShipData where U : Mono
         }
     }
 
-    protected void FireBullet(Transform weapon, Transform target = null)
+    protected void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false)
     {
         Bullet newBullet = Instantiate(BulletPrefab, weapon.position, BulletPrefab.transform.rotation, SpawnManager.Instance.BulletParent);
         newBullet.gameObject.layer = LayerMask.NameToLayer(BulletLayerMask);
-        newBullet.Speed = Data.BulletSpeed;
+        newBullet.Speed = speed;
         newBullet.Target = target;
         newBullet.BulletDirection = _bulletDirectionEnum;
 
         newBullet.BulletType = _bulletType;
+    }
+
+    public virtual void OnGetHit(Bullet bullet)
+    {
     }
 }
