@@ -29,9 +29,13 @@ public class EnemyFighter : Enemy
         {
             if(_delayCounter <= 0)
             {
-                FireBullet(Turret, TurretBulletSpeed, Player.Instance.transform);
-                _turretAmmoCounter--;
-                _delayCounter = DelayPerFire;
+                if (Player.Instance != null)
+                {
+                    FireBullet(Turret, TurretBulletSpeed, Player.Instance.transform);
+
+                    _turretAmmoCounter--;
+                    _delayCounter = DelayPerFire;
+                }
             }
             else
             {

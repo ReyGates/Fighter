@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883706937174329409}
   - component: {fileID: 4883706937174329410}
+  - component: {fileID: 2774593492370398246}
   m_Layer: 5
   m_Name: Health Bar UI
   m_TagString: Untagged
@@ -122,6 +123,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarSlider: {fileID: 4883706938226028171}
+  CanvasGroup: {fileID: 2774593492370398246}
+--- !u!225 &2774593492370398246
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883706937174329408}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4883706937401559354
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +359,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4883706937935121763}
   m_FillRect: {fileID: 4883706938571254882}
   m_HandleRect: {fileID: 4883706937935121762}

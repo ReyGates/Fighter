@@ -24,6 +24,9 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
 
     protected Camera _cam;
 
+    private float _uiAlphaTime = 2;
+    private float _uiAlphaCounter = 0;
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,11 +45,45 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         _healthBarUI = GuiManager.CreateHealthBarUI();
         _healthBarUI.HealthBarSlider.maxValue = Data.Health;
         _healthBarUI.HealthBarSlider.value = Data.Health;
+        _healthBarUI.CanvasGroup.alpha = 0;
     }
 
     protected virtual void Update()
     {
-        _healthBarUI.RectTransform.position = _cam.WorldToScreenPoint(transform.position);
+        UpdateUI();
+
+        if(Data.Health <= 0)
+        {
+            Destroy(_healthBarUI.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    private void UpdateUI()
+    {
+        Vector3 newPos = _cam.WorldToScreenPoint(transform.position);
+        newPos.y -= 20;
+
+        _healthBarUI.RectTransform.position = newPos;
+
+        if(_uiAlphaCounter > 0)
+        {
+            _healthBarUI.CanvasGroup.alpha += 1f * Time.deltaTime;
+
+            if(_healthBarUI.CanvasGroup.alpha >= 1)
+            {
+                _healthBarUI.CanvasGroup.alpha = 1;
+                _uiAlphaCounter -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            _uiAlphaCounter = 0;
+            if(_healthBarUI.CanvasGroup.alpha > 0)
+            {
+                _healthBarUI.CanvasGroup.alpha -= 1f * Time.deltaTime;
+            }
+        }
     }
 
     protected void Move(Vector3 newPos)
@@ -115,5 +152,6 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         Destroy(bullet.gameObject);
 
         _healthBarUI.HealthBarSlider.value = Data.Health;
+        _uiAlphaCounter = _uiAlphaTime;
     }
 }

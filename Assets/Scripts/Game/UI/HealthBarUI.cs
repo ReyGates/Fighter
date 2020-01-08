@@ -6,6 +6,8 @@ public class HealthBarUI : MonoBehaviour
 {
     public Slider HealthBarSlider;
 
+    public CanvasGroup CanvasGroup;
+
     public RectTransform RectTransform
     {
         get

@@ -28,6 +28,13 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(1);
             SpawnManager.Instance.SpawnEnemyFighter();
             _counter++;
+
+            if(Player.Instance == null)
+            {
+                Time.timeScale = 0;
+                yield return new WaitUntil(()=>Player.Instance != null);
+                Time.timeScale = 1;
+            }
         }
     }
 }
