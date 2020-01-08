@@ -875,6 +875,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1754695460, guid: efe104976eb4eef43bcb7fd7ea23ba6c, type: 3}
+  BossPrefab: {fileID: 0}
+  EnemyPrefabList:
+  - {fileID: 8042276101173999644, guid: 204446154a776cf41b133b899c9ba5ae, type: 3}
+  Boss: {fileID: 0}
+  EnemyList: []
+  EnemyParent: {fileID: 1556632543}
 --- !u!1 &1071894810
 GameObject:
   m_ObjectHideFlags: 0
