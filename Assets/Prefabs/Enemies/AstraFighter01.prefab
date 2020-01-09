@@ -192,7 +192,10 @@ MonoBehaviour:
     BulletSpeed: 20
     Health: 10
     BulletDelay: 1
-  WeaponTransform: {fileID: 4318255382010928625}
+    BulletDamage: 1
+    WeaponDataList:
+    - WeaponTransform: {fileID: 4318255382010928625}
+      IsActive: 1
   BulletPrefab: {fileID: 6029470201958612944, guid: 311cca651839d1a4890d67292925562a,
     type: 3}
   BulletLayerMask: Enemy
@@ -202,6 +205,7 @@ MonoBehaviour:
   Cooldown: 3
   DelayPerFire: 0.1
   TurretBulletSpeed: 10
+  TurretBulletDamage: 0.25
 --- !u!136 &324737873
 CapsuleCollider:
   m_ObjectHideFlags: 0

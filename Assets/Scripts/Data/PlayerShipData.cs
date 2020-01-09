@@ -22,6 +22,13 @@ public class PlayerShipData : BaseShipData
 
             InGamePanel.Instance.PowerIndicatorSlider.value = _power;
             InGamePanel.Instance.PowerButton.interactable = _power >= 100;
+
+            int weaponActiveCount = 1 + Mathf.FloorToInt(_power / (100 / (WeaponDataList.Count - 1)));
+            
+            for(int i = 0; i < WeaponDataList.Count; i++)
+            {
+                WeaponDataList[i].IsActive = i < weaponActiveCount;
+            }
         }
     }
 

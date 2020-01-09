@@ -2,12 +2,12 @@
 using System.Collections;
 using System;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData where U : MonoBehaviour
 {
     public T Data;
 
-    public Transform WeaponTransform;
     public Bullet BulletPrefab;
     public string BulletLayerMask;
 
@@ -132,7 +132,11 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         {
             if (_fire)
             {
-                FireBullet(WeaponTransform, Data.BulletSpeed, null, false, Data.BulletDamage);
+                foreach (var weapon in Data.WeaponDataList)
+                {
+                    if(weapon.IsActive)
+                        FireBullet(weapon.WeaponTransform, Data.BulletSpeed, null, false, Data.BulletDamage);
+                }
 
                 yield return new WaitForSeconds(Data.BulletDelay);
             }

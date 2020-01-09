@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class BaseShipData
@@ -10,4 +11,6 @@ public class BaseShipData
 
     public float BulletDelay = 1;
     public float BulletDamage = 1;
+
+    public List<WeaponData> WeaponDataList;
 }

@@ -286,6 +286,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157555315}
   m_CullTransparentMesh: 0
+--- !u!1001 &207650219
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4946128121229843634, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_Name
+      value: AstraBattleship01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121229843634, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946128121230131346, guid: 435f25b93d2b73d42baf0348f00638c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 435f25b93d2b73d42baf0348f00638c0, type: 3}
 --- !u!1 &286873084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,6 +1277,8 @@ MonoBehaviour:
   BossPrefab: {fileID: 0}
   EnemyPrefabList:
   - {fileID: 9059811980789014246, guid: 204446154a776cf41b133b899c9ba5ae, type: 3}
+  - {fileID: 2144853694, guid: ad31a1d86aed68340b2151db64b469a9, type: 3}
+  - {fileID: 2598196327352046855, guid: 82583fb394a5f7249aecd4747436dbed, type: 3}
   Boss: {fileID: 0}
   EnemyList: []
   EnemyParent: {fileID: 1556632543}
