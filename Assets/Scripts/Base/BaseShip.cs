@@ -18,7 +18,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
     [SerializeField]
     protected BulletDirectionEnum _bulletDirectionEnum;
 
-    private BulletTypeEnum _bulletType;
+    protected BulletTypeEnum _bulletType;
 
     private HealthBarUI _healthBarUI;
 
@@ -58,7 +58,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         }
     }
 
-    public void Destroy()
+    public virtual void Destroy()
     {
         Destroy(_healthBarUI.gameObject);
         SpawnManager.Instance.RemoveFromList(gameObject);
@@ -145,7 +145,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
         }
     }
 
-    protected void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false, float damage = -1)
+    protected virtual void FireBullet(Transform weapon, float speed, Transform target = null, bool followTarget = false, float damage = -1)
     {
         if (Data.Health <= 0)
             return;
@@ -161,6 +161,8 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
             newBullet.Damage = damage;
 
         newBullet.BulletType = _bulletType;
+
+        AudioManager.Instance.PlayLaserSFX();
     }
 
     public virtual void OnGetHit(Bullet bullet)

@@ -13,9 +13,12 @@ public class Enemy : BaseShip<EnemyShipData, Enemy>
     protected override void Update()
     {
         base.Update();
-
+        MoveAI();
         _fire = true;
+    }
 
+    protected virtual void MoveAI()
+    {
         Vector3 newPos = transform.position;
         newPos.x -= 1;
         Move(newPos);

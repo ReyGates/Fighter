@@ -32,11 +32,15 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public void SpawnEnemyBoss()
     {
-
+        Boss = Instantiate(BossPrefab, new Vector3(15, 0, 0), BossPrefab.transform.rotation, EnemyParent);
+        EnemyList.Add(Boss);
     }
 
     public void SpawnPlayer()
     {
+        if (Player.Instance != null)
+            Player.Instance.Destroy();
+
         foreach (var bullet in BulletParent.GetComponentsInChildren<Bullet>())
         {
             Destroy(bullet.gameObject);

@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         StartGame();
+        StartCoroutine(CheckPlayerEnumerator());
     }
 
     public void StartGame()
@@ -35,6 +36,18 @@ public class GameManager : Singleton<GameManager>
         StartGame();
     }
 
+    IEnumerator CheckPlayerEnumerator()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(()=>Player.Instance == null);
+            Time.timeScale = 0;
+            GameOverPanel.Instance.gameObject.SetActive(true);
+            yield return new WaitUntil(() => Player.Instance != null);
+            Time.timeScale = 1;
+        }
+    }
+
     IEnumerator GameEnumerator()
     {
         while(_counter < GameDuration)
@@ -42,14 +55,24 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(1);
             SpawnManager.Instance.SpawnEnemyFighter();
             _counter++;
-
-            if(Player.Instance == null)
-            {
-                Time.timeScale = 0;
-                GameOverPanel.Instance.gameObject.SetActive(true);
-                yield return new WaitUntil(()=>Player.Instance != null);
-                Time.timeScale = 1;
-            }
         }
+
+        yield return new WaitForSeconds(2);
+
+        SpawnManager.Instance.SpawnEnemyBoss();
+        //yield return new WaitUntil(()=>SpawnManager.Instance.Boss == null);
+        int random = 0;
+        while(SpawnManager.Instance.Boss != null)
+        {
+            random = Random.Range(0, 100);
+            if(random <= 20)
+            {
+                SpawnManager.Instance.SpawnEnemyFighter();
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        Player.Instance.Data.Health = 0;
     }
 }
