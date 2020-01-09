@@ -4989,7 +4989,7 @@ MonoBehaviour:
   Data:
     Speed: 10
     BulletSpeed: 30
-    Health: 1000
+    Health: 100
     BulletDelay: 0.15
     BulletDamage: 1
     WeaponDataList:
