@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyBoss : EnemyFighter
 {
+    public float MaxHealth;
     public bool Ready = false;
 
     public BulletTypeEnum ShieldType = BulletTypeEnum.Player;
@@ -21,6 +22,7 @@ public class EnemyBoss : EnemyFighter
     {
         base.Start();
 
+        MaxHealth = Data.Health;
         _shieldActiveDelayCounter = ShieldActiveDelay;
     }
 
@@ -96,12 +98,5 @@ public class EnemyBoss : EnemyFighter
         {
             Destroy(bullet.gameObject);
         }
-    }
-
-    public override void Destroy()
-    {
-        base.Destroy();
-
-        GameManager.Instance.RestartGame();
     }
 }

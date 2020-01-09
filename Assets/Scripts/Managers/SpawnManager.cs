@@ -5,10 +5,10 @@ using UnityEngine;
 public class SpawnManager : Singleton<SpawnManager>
 {
     public Player PlayerPrefab;
-    public Enemy BossPrefab;
+    public EnemyBoss BossPrefab;
     public List<Enemy> EnemyPrefabList;
 
-    public Enemy Boss;
+    public EnemyBoss Boss;
     public List<Enemy> EnemyList;
 
     public Transform EnemyParent;

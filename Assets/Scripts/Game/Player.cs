@@ -9,6 +9,7 @@ public class Player : BaseShip<PlayerShipData, Player>
     public MeshRenderer ForceFieldRenderer;
 
     private Animator _animator;
+    private float _immuneCounter = 3;
 
     protected override void Awake()
     {
@@ -24,6 +25,9 @@ public class Player : BaseShip<PlayerShipData, Player>
         base.Update();
 
         PlayerInputUpdate();
+
+        if(_immuneCounter > 0)
+            _immuneCounter -= Time.deltaTime;
     }
 
     public void SwitchShield()
@@ -94,6 +98,9 @@ public class Player : BaseShip<PlayerShipData, Player>
 
     public override void OnGetHit(Bullet bullet)
     {
+        if (_immuneCounter > 0)
+            return;
+
         if(bullet.BulletType != Data.ShieldType)
         {
             Data.Health -= bullet.Damage;
@@ -102,6 +109,15 @@ public class Player : BaseShip<PlayerShipData, Player>
         Data.Power += 0.5f;
 
         base.OnGetHit(bullet);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_immuneCounter > 0)
+            return;
+
+        if (collision.transform.GetComponent<Enemy>() != null)
+            Data.Health = 0;
     }
 
     public void PowerShot()

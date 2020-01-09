@@ -4854,7 +4854,6 @@ GameObject:
   - component: {fileID: 1858627285}
   - component: {fileID: 1858627288}
   - component: {fileID: 1858627287}
-  - component: {fileID: 1858627286}
   m_Layer: 8
   m_Name: Force Field
   m_TagString: Untagged
@@ -4922,19 +4921,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1858627286
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858627284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8141902259035189619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,6 +4933,7 @@ GameObject:
   - component: {fileID: 1754695460}
   - component: {fileID: 698723540}
   - component: {fileID: 1826095204689401745}
+  - component: {fileID: 1219138968}
   m_Layer: 8
   m_Name: Fighter
   m_TagString: Player
@@ -4989,7 +4976,7 @@ MonoBehaviour:
   Data:
     Speed: 10
     BulletSpeed: 30
-    Health: 100
+    Health: 50
     BulletDelay: 0.15
     BulletDamage: 1
     WeaponDataList:
@@ -5043,6 +5030,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!135 &1219138968
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141902259035189619}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1001 &8141902259263089171
 PrefabInstance:
   m_ObjectHideFlags: 0

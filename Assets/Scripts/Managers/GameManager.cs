@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
         {
             yield return new WaitUntil(()=>Player.Instance == null);
             Time.timeScale = 0;
-            GameOverPanel.Instance.gameObject.SetActive(true);
+            GameOverPanel.Instance.ShowGameOver();
             yield return new WaitUntil(() => Player.Instance != null);
             Time.timeScale = 1;
         }
@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
             _counter++;
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitUntil(()=>SpawnManager.Instance.EnemyList.Count == 0);
 
         SpawnManager.Instance.SpawnEnemyBoss();
         //yield return new WaitUntil(()=>SpawnManager.Instance.Boss == null);
@@ -67,12 +67,14 @@ public class GameManager : Singleton<GameManager>
             random = Random.Range(0, 100);
             if(random <= 20)
             {
-                SpawnManager.Instance.SpawnEnemyFighter();
+                if(SpawnManager.Instance.Boss.Data.Health <= (SpawnManager.Instance.Boss.MaxHealth / 2))
+                    SpawnManager.Instance.SpawnEnemyFighter();
             }
 
             yield return new WaitForSeconds(0.5f);
         }
 
-        Player.Instance.Data.Health = 0;
+        Time.timeScale = 0;
+        GameOverPanel.Instance.ShowVictory();
     }
 }

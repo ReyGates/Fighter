@@ -67,7 +67,7 @@ public class BaseShip<T, U> : Singleton<U>, IBaseShip where T : BaseShipData whe
     private void UpdateUI()
     {
         Vector3 newPos = _cam.WorldToScreenPoint(transform.position);
-        newPos.y -= 20;
+        newPos.y -= 30;
 
         _healthBarUI.RectTransform.position = newPos;
 
